@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>File and Code Importer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .container {
+        margin-top: 50px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0px 0px 10px #ccc;
+      }
+      h1 {
+        color: #007bff;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 30px;
+      }
+      label {
+        font-weight: bold;
+        color: #333;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+      .btn-primary:hover {
+        background-color: #0062cc;
+        border-color: #0062cc;
+      }
+      .form-control {
+        background-color: #f8f9fa;
+        color: #333;
+        border: none;
+      }
+      .form-control:focus {
+        background-color: #f8f9fa;
+        color: #333;
+        box-shadow: none;
+      }
+      .custom-file-label {
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>File and Code Importer</h1>
+      <form action="{{ url_for('submit') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="foldername">Folder Name:</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="foldername" name="foldername" value="{{ foldername }}" required>
+            <div class="input-group-append">
+              <span class="input-group-text">{{ timestamp }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="prev_companies">Previous Companies:</label>
+            <textarea class="form-control" id="prev_companies" name="prev_companies" rows="3">{{ prev_companies }}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="file">Select Folder:</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="file" name="file" webkitdirectory required onchange="displayFileCount(this)">
+              <label class="custom-file-label" for="file">Choose folder</label>
+            </div>
+            <p id="fileCount"></p>
+          </div>
+          
+          
+          <script>
+          function displayFileCount(input) {
+            if (input.files && input.files.length > 0) {
+              const fileCount = input.files.length;
+              document.getElementById("fileCount").innerHTML = `Total files: ${fileCount}`;
+            } else {
+              document.getElementById("fileCount").innerHTML = "";
+            }
+          }
+          </script>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="action">Import Option:</label>
+          <select class="form-control" id="action" name="action" required>
+            <option value="" selected disabled>Select option</option>
+            <option value="search_metadata">Search Metadata</option>
+            <option value="import_files">Import Files</option>
+            <option value="import_code">Import Code</option>
+            <option value="import_files_code">Import Files and Code</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-BH4Y4Ok6y3q6BvU6gnLQZyo0CZj2iDxsbxPbAkUMvj5o5yGsm5Lthvup/J5ar5p25VugATN+G1fV7NldKjN/0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </body>
+</html>

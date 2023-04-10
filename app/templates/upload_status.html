@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Status</title>
+</head>
+<body>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+    {% if results %}
+    <h1>Grep Results:</h1>
+    <ul>
+        {% for result in results %}
+        <li>{{ result }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No results found</p>
+    {% endif %}
+    <br>
+    <a href="{{ url_for('index') }}">Upload more files</a>
+</body>
+</html>
